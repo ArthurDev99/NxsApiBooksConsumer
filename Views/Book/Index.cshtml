@@ -1,0 +1,112 @@
+﻿@model IEnumerable<APIConsumer.Models.ViewModels.Books.BookItemList>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Listado de libros</h2>
+        </div>
+    </div>
+    <div></div>
+    <div class="row">
+        <div class="col-md-12">
+            <p>Puedes crear un nuevo libro haciendo @Html.ActionLink("click aquí", "Create"), o bien, puedes realizar búsquedas mediante los siguientes parámetros:</p>
+            @using (Html.BeginForm("Index", "Book", FormMethod.Get))
+            {
+                <div class="row">
+                    <div class="col-lg-3">
+                        <input type="text" class="form-control" name="author" placeholder="Palabra Clave Autor" />
+                    </div>
+                    <div class="col-lg-3">
+                        <input type="text" class="form-control" name="title" placeholder="Palabra Clave Titulo" />
+                    </div>
+                    <div class="col-lg-3">
+                        <input type="number" class="form-control" name="year" placeholder="Año de publicación" />
+                    </div>
+                    <div class="col-lg-3">
+
+                        <input class="btn btn-primary" type="submit" value="Realizar búsqueda" />
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+    <br />
+    @if (!String.IsNullOrEmpty(ViewBag.Error))
+    {
+        <div class="row">
+            <div class="alert alert-danger">
+                @ViewBag.Error
+            </div>
+        </div>
+    }
+
+    @if (!String.IsNullOrEmpty(ViewBag.Success))
+    {
+        <div class="row">
+            <div class="alert alert-success">
+                @ViewBag.Success
+            </div>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <table class="table">
+                <tr>
+                    <th>
+                        Título
+                    </th>
+                    <th>
+                        Año de publicación
+                    </th>
+                    <th>
+                        Género
+                    </th>
+                    <th>
+                        Número de páginas
+                    </th>
+                    <th>
+                        Nombre del autor
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Convert.ToInt32(item.PublicationYear)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Gender)
+                        </td>
+                        <td>
+                            @Convert.ToInt32(item.NumberPages)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AuthorName)
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById().addEventListener("keyup", () => {
+        $.ajax({
+
+        });
+    });
+
+</script>

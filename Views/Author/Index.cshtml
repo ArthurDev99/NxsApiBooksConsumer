@@ -1,0 +1,65 @@
+﻿@model IEnumerable<APIConsumer.Models.ViewModels.Authors.AuthorVM>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Listado de autores</h2>
+
+<div>
+    <p>
+        si deseas, puedes crear un nuevo autor haciendo @Html.ActionLink("click aquí.", "Create")
+    </p>
+</div>
+@if (!String.IsNullOrEmpty(ViewBag.Error))
+{
+    <div>
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
+    </div>
+}
+
+@if (!String.IsNullOrEmpty(ViewBag.Success))
+{
+    <div class="row">
+        <div class="alert alert-success">
+            @ViewBag.Success
+        </div>
+    </div>
+}
+<table class="table">
+    <tr>
+        <th>
+            Nombre
+        </th>
+        <th>
+            Fecha de nacimiento
+        </th>
+        <th>
+            Lugar de residencia
+        </th>
+        <th>
+            Correo
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @item.Birthday.ToShortDateString()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hometown)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+        </tr>
+    }
+
+</table>
